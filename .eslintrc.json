@@ -1,0 +1,71 @@
+{
+  // "used by npm package.json for cmd: yarn lint"
+
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": [
+    "compat"
+  ],
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "jest": true
+  },
+  "settings": {
+    // Mark these as polyfilled - since we include @see `includes/js/polyfill.js` on every page.
+    // We do this so lint testing won't squawk about Promise not being supported in IE 11.
+    // Keep this list sync-ed with @see `includes/js/polyfill.js`
+    "polyfills": [
+      "Array.from",
+      "Promise",
+      "Object.assign",
+      "window.customElements"
+    ]
+  },
+  "rules": {
+    // this just showed up w/ babel + eslint updates to latest versions Sep1,2019
+    "operator-linebreak": "off",
+    "import/no-cycle": "off", // it's ok to have cycles with ES Modules and import
+
+    // "make sure all used JS compatible with 90%+ of currently used browsers a la caniuse.com"
+    "compat/compat": "error",
+
+    // "allow JSX in .js files"
+    "react/jsx-filename-extension": "off",
+
+    // "allow snakecase var names if dev desires"
+    "camelcase": "off",
+
+    // "allow: x  = 3 (for example lining up multiple lines by column)"
+    "no-multi-spaces": "off",
+
+    // "author discretion when using braces around one-liners or same-liners"
+    "curly": "off",
+
+    // "allow ++ or -- at the end fo a for() loop (all other uses are banned per airbnb!)"
+    "no-plusplus": ["error", {"allowForLoopAfterthoughts": true}],
+
+    // "allow JSON/map definitions to column-align values when multiline"
+    "key-spacing": ["error", {"mode": "minimum"}],
+
+    // "allow for (x of array)  and  for (key in obj)  and   for (val in array)"
+    "no-restricted-syntax": ["error", "LabeledStatement", "WithStatement"],
+
+    "no-restricted-globals": ["off", "location"],
+
+    "nonblock-statement-body-position": "off",
+
+    "indent": ["error", 2, {"CallExpression": {"arguments": "first"},
+                            "ArrayExpression": "first",
+                            "FunctionDeclaration": {"parameters": "first"},
+                            "FunctionExpression": {"body": 1, "parameters": 2} }],
+
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["**/webpack.*.js", "**/*.test.js"]
+    }],
+
+    // "Turning these off since they throw errors for devDependencies"
+    "import/no-unresolved": ["off"],
+    "import/extensions": ["off"]
+  }
+}

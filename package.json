@@ -1,0 +1,41 @@
+{
+  "name": "project-offshoot-archive.org-new-website-using-js-and-web-components",
+  "browserslist": [
+    "> 1%"
+  ],
+  "dependencies": {
+    "@vaadin/router": "",
+    "@webcomponents/webcomponentsjs": "",
+    "chrome-aws-lambda": "",
+    "fs-extra": "",
+    "iltorb": "",
+    "koa": "",
+    "koa-bodyparser": "",
+    "koa-compress": "",
+    "koa-route": "",
+    "koa-send": "",
+    "lit-element": "",
+    "puppeteer-core": "",
+    "semver": "",
+    "snowpack": "",
+    "whatwg-fetch": ""
+  },
+  "devDependencies": {
+    "babel-eslint": "",
+    "eslint": "",
+    "eslint-config-airbnb": "latest",
+    "eslint-plugin-compat": "",
+    "eslint-plugin-import": "",
+    "eslint-plugin-jsx-a11y": "",
+    "eslint-plugin-react": "",
+    "http-server": ""
+  },
+  "scripts": {
+    "test": "node_modules/.bin/eslint .",
+    "postinstall": "mkdir -p www/js/build  &&  snowpack  &&  cp -pr  node_modules/@webcomponents/webcomponentsjs  www/js/build/  &&  ( [ -e /.dockerenv ]  ||  scripts/get-mdapi-json.sh )",
+    "serve": "( sleep 2; open http://localhost:8888 ) & node_modules/.bin/http-server www -p 8888 --proxy http://localhost:8888?"
+  },
+  "vaadin": {
+    "disableUsageStatistics": true
+  }
+}

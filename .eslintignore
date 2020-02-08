@@ -1,0 +1,5 @@
+node_modules/
+web_modules/
+www/js/build/
+www/jw/
+www/**/*.min.js

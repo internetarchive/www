@@ -1,0 +1,12 @@
+#!/bin/zsh -ex
+
+# uncompress chromium binary to /tmp/chromium (129MB)
+node -e "const { inflate } = require('lambdafs'); inflate('/app/node_modules/chrome-aws-lambda/bin/chromium.br');"
+
+
+# fire off into background and forget about it for now
+/app/node_modules/rendertron/bin/rendertron &
+
+
+# run nginx in foreground
+nginx -g 'daemon off;'
