@@ -1,23 +1,12 @@
 {
-  "name": "project-offshoot-archive.org-new-website-using-js-and-web-components",
+  "name": "offshoot",
   "browserslist": [
     "> 1%"
   ],
   "dependencies": {
     "@vaadin/router": "",
     "@webcomponents/webcomponentsjs": "",
-    "chrome-aws-lambda": "",
-    "fs-extra": "",
-    "iltorb": "",
-    "koa": "",
-    "koa-bodyparser": "",
-    "koa-compress": "",
-    "koa-route": "",
-    "koa-send": "",
     "lit-element": "",
-    "puppeteer-core": "",
-    "semver": "",
-    "snowpack": "",
     "whatwg-fetch": ""
   },
   "devDependencies": {
@@ -28,7 +17,8 @@
     "eslint-plugin-import": "",
     "eslint-plugin-jsx-a11y": "",
     "eslint-plugin-react": "",
-    "http-server": ""
+    "http-server": "",
+    "snowpack": ""
   },
   "scripts": {
     "test": "node_modules/.bin/eslint .",
