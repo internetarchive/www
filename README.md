@@ -1,7 +1,7 @@
 # JS-based archive.org web components prototype
 
 ## live site / demo
-https://www-www.dev.archive.org
+https://internetarchive-www.dev.archive.org
 
 ## uses rendertron for SEO / crawlers
 
@@ -13,7 +13,7 @@ https://www-www.dev.archive.org
 
 
 ## quickstart
-- `git clone git@git.archive.org:www/www`
+- `git clone git@gitlab.com:internetarchive/www`
 - `cd www  &&  yarn  &&  yarn serve`
 
 
@@ -39,13 +39,6 @@ https://www-www.dev.archive.org
 -   - `ruby -run -e httpd . -p 8888`
 
 
-## some sample items
-- [commute](http://www-www.dev.archive.org/details/commute)
-- [stairs](http://www-www.dev.archive.org/details/stairs)
-- [ellepurr](http://www-www.dev.archive.org/details/elleurr)
-- [gd77-05-08.sbd.hicks.4982.sbeok.shnf](http://www-www.dev.archive.org/details/gd77-05-08.sbd.hicks.4982.sbeok.shnf)
-- [Sita_Sings_the_Blues](http://www-www.dev.archive.org/details/Sita_Sings_the_Blues)
-
 ## helpful links
 - https://github.com/GoogleChrome/rendertron
 - https://github.com/GoogleChrome/rendertron/tree/master/middleware
@@ -57,21 +50,21 @@ https://www-www.dev.archive.org
 Simply add `?render=1` CGI arg to force the rendertron path.
 
 Compare these two urls (not in IE11):
-- http://www-www.dev.archive.org/details/commute
-- http://www-www.dev.archive.org/details/commute?render=1
+- http://internetarchive-www.dev.archive.org/details/commute
+- http://internetarchive-www.dev.archive.org/details/commute?render=1
 
 ## See differential loading - command line
 Pass a user-agent header into `wget`/`curl` self-identifying with a crawler pattern.
 
 Compare these two responses:
 ```bash
-wget -qO- http://www-www.dev.archive.org/details/commute
-wget -qO- http://www-www.dev.archive.org/details/commute --head='User-agent: Googlebot'
+wget -qO- http://internetarchive-www.dev.archive.org/details/commute
+wget -qO- http://internetarchive-www.dev.archive.org/details/commute --head='User-agent: Googlebot'
 ```
 
 ## Use rendertron inside webapp/container
 ```bash
-wget -qO- localhost:3000/render/http://archive.org/details/commute
+wget -qO- localhost:3000/render/http://internetarchive-www.dev.archive.org/details/commute
 ```
 
 ## update copied `petabox/components/` subdirs
