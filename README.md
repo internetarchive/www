@@ -11,6 +11,12 @@ https://www-www.dev.archive.org
   - all A/V items working reasonably now
 - other items currently look for 'original' imagery to display in theatre
 
+
+## quickstart
+- `git clone git@git.archive.org:www/www`
+- `cd www  &&  yarn  &&  yarn serve`
+
+
 ## local/offline dev
 - `yarn serve` is the typical way to run a local/minimal http file server at http://localhost:8888
 - Alternatively, this `chrome extension` seems really nice
@@ -31,11 +37,6 @@ https://www-www.dev.archive.org
 -   - maybe some way to run auto-rewrites for these or similar:
 -   - `python3 -m http.server --cgi 8888`
 -   - `ruby -run -e httpd . -p 8888`
-
-
-## quickstart
-- `git clone git@git.archive.org:www/www`
-- `cd www  &&  yarn  &&  yarn serve`
 
 
 ## some sample items
