@@ -1,0 +1,15 @@
+{
+  "name": "rendertron-dependencies",
+  "dependencies": {
+    "chrome-aws-lambda": "",
+    "fs-extra": "",
+    "iltorb": "",
+    "koa": "",
+    "koa-bodyparser": "",
+    "koa-compress": "",
+    "koa-route": "",
+    "koa-send": "",
+    "puppeteer-core": "",
+    "semver": ""
+  }
+}

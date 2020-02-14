@@ -45,11 +45,7 @@ COPY .   /app
 WORKDIR  /app
 
 
-RUN yarn  &&  \
-    yarn add  chrome-aws-lambda  fs-extra  iltorb  \
-              koa  koa-bodyparser  koa-compress  koa-route  koa-send  \
-              puppeteer-core  semver  &&  \
-    find /usr/local/share/.cache/yarn -delete
+RUN yarn  &&  cd docker  &&  yarn  &&  find /usr/local/share/.cache/yarn -delete
 # ^^ 349MB (60MB just for eslint)
 
 
