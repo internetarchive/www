@@ -87,6 +87,8 @@ include:
   - template: Security/SAST.gitlab-ci.yml  # https://gitlab.com/gitlab-org/gitlab-foss/blob/master/lib/gitlab/ci/templates/Security/SAST.gitlab-ci.yml
 
 
+# ensure we deploy all branches into same namespace (and bonus, no long project ID integer suffix)
+# https://docs.gitlab.com/ee/ci/yaml/#environmentkubernetes
 review:
   environment:
     kubernetes:
