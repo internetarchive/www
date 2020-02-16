@@ -1,4 +1,4 @@
-# JS-based archive.org web components prototype
+# archive.org evolving website - using only javascript static files (Project "Offshoot")
 
 ## live site / demo
 https://internetarchive-www.dev.archive.org
@@ -19,7 +19,8 @@ https://internetarchive-www.dev.archive.org
 
 ## local/offline dev
 - `yarn serve` is the typical way to run a local/minimal http file server at http://localhost:8888
-- Alternatively, this `chrome extension` seems really nice
+- Other http servers do fine too, but need to send urls (that don't map to files) to `/index.html` (single page application)
+- Alternatively, this `chrome extension` is convenient
   - https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb
   - serves files on http://localhost:8888 including usable MIME types and avoids CORS issues with ES Modules
   - allows for single regexp rewrite (eg: /details/ => /index.html)
@@ -33,10 +34,6 @@ https://internetarchive-www.dev.archive.org
       - Regular Expression: `\.(css|gif|ico|js|json|map|md|png|txt)$`
       - [✅] Negate Regexp
       - Rewrite To: /index.html
-- Other simple http servers do fine too, but you need something to auto-map urls starting with `/details/..` to `/index.html` (like the above extension does), eg:
--   - maybe some way to run auto-rewrites for these or similar:
--   - `python3 -m http.server --cgi 8888`
--   - `ruby -run -e httpd . -p 8888`
 
 
 ## helpful links
