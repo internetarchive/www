@@ -54,6 +54,16 @@ const AUDIO = [
   'mp3 sample',
 ]
 
+const IGNORES = [
+  '64kbps m3u',
+  '64kbps mp3 zip',
+  'checksums',
+  'flac fingerprint',
+  'item tile',
+  'vbr m3u',
+  'vbr zip',
+]
+
 
 class Player {
   constructor(mdapi, onlyThisGroup = false) {
@@ -425,7 +435,7 @@ class Player {
     const suffixLC = filename.substr(1 + filename.lastIndexOf('.')).toLowerCase()
     const formatLC = fi.format.toLowerCase()
 
-    if (formatLC === 'item tile'  ||  filename === THUMB_NAME)
+    if (IGNORES.includes(formatLC)  ||  filename === THUMB_NAME)
       return [] // ignore these files altogether
 
     // do I like this next special case?  no i don't, but reality...
