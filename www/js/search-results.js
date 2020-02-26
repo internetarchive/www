@@ -63,9 +63,8 @@ form > div {
 
     const scrape = false
 
-    // xxx www-tracey for CORS issues right now..
     if (scrape) {
-      const url = `https://www-tracey.archive.org/services/search/v1/scrape?count=100&fields=${this.fields.join(',')}&q=${this.query}`
+      const url = `https://archive.org/services/search/v1/scrape?count=100&fields=${this.fields.join(',')}&q=${this.query}`
 
       // eslint-disable-next-line compat/compat
       const response = await fetch(url)
@@ -73,7 +72,7 @@ form > div {
       return json.items
     }
 
-    const url = `https://www-tracey.archive.org/advancedsearch.php?output=json&q=${this.query}&fl[]=${this.fields.join('&fl[]=')}`
+    const url = `https://archive.org/advancedsearch.php?output=json&q=${this.query}&fl[]=${this.fields.join('&fl[]=')}`
 
     // eslint-disable-next-line compat/compat
     const response = await fetch(window.navigator.onLine === false
