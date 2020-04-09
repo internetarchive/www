@@ -1,8 +1,8 @@
-import './build/@internetarchive/mobile-top-nav.js';
+import './build/@internetarchive/ia-topnav.js';
 import URLSearchParams from './build/@ungap/url-search-params.js';
 
 /**
- * Mobile top nav component
+ * Top nav component
  *
  * config attribute is required. Properties are:
  * username: used for user menu URL generation. Required.
@@ -25,4 +25,4 @@ params.forEach((val, key) => {
   options[key] = val;
 });
 
-document.body.innerHTML = `<topnav-element config='${JSON.stringify(options)}'></topnav-element>`;
+document.body.innerHTML = `<ia-topnav config='${JSON.stringify(options)}'></ia-topnav>`;

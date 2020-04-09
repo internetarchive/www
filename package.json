@@ -4,7 +4,7 @@
     "> 1%"
   ],
   "dependencies": {
-    "@internetarchive/mobile-top-nav": "0.1.1-alpha.637",
+    "@internetarchive/ia-topnav": "0.1.1-alpha.537",
     "@ungap/url-search-params": "^0.1.4",
     "@vaadin/router": "",
     "@webcomponents/webcomponentsjs": "",

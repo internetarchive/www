@@ -1,33 +1,19 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Mobile Top Nav</title>
+    <title>Top Nav</title>
     <style>
       html, body {
         margin: 0;
         font: normal 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
-      topnav-element {
+      ia-topnav {
         --baseColor: #999;
         --activeColor: #fff;
         --activeSearchColor: #222;
-        @media (max-width: @xs-max) {
-          display: block;
-          + #navwrap1 {
-            display: none;
-          }
-          &.hidden {
-            display: none;
-            + #navwrap1 {
-              display: block;
-            }
-          }
-        }
       }
     </style>
-    <!-- Always load the Webcomponents Polyfill (no-op on browsers that have support) -->
-    <script src="/js/build/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script type="module" src="/js/mobile-nav.js"></script>
+    <script type="module" src="/js/ia-topnav.js"></script>
   </head>
   <body>
   </body>
