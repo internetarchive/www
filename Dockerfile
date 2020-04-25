@@ -65,4 +65,4 @@ RUN rm -rfv          /usr/share/nginx/html  &&  \
 
 CMD [ "/app/docker/superv" ]
 # NOTE: was 268MB Feb25, 2020
-# ^^ 374MB
+# ^^ 369MB
