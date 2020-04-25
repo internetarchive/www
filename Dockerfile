@@ -21,7 +21,7 @@ libnss3 \
 ca-certificates \
 ' |fgrep -v '#')  && \
     wget -qO- https://deb.nodesource.com/setup_14.x |bash -  && \
-    apt-get -yqq --no-install-recommends nodejs
+    apt-get -yqq --no-install-recommends install nodejs
 # ^^ 170MB before node/npm setup
 # ^^ 206MB before node/npm install
 # ^^ 309MB after  node/npm install
