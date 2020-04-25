@@ -1,5 +1,6 @@
 # Start with 'nginx' docker image (debian OS) - builds out to ~281MB.
 # We use 'nginx' instead of 'node' because we need nginx > 1.16.1 for http2 CVE fix
+# (node:buster-slim also has http2 CVE fixes in)
 FROM nginx
 # ^^ 126MB
 
@@ -20,8 +21,9 @@ libnss3 \
 # for https: \
 ca-certificates \
 ' |fgrep -v '#')  && \
-    wget -qO- https://deb.nodesource.com/setup_14.x |bash -  && \
-    apt-get -yqq --no-install-recommends install nodejs
+    wget -qO- https://deb.nodesource.com/setup_13.x |bash -  && \
+    apt-get -yqq --no-install-recommends install nodejs  && \
+    npm cache clean --force
 # ^^ 170MB before node/npm setup
 # ^^ 206MB before node/npm install
 # ^^ 309MB after  node/npm install
@@ -41,10 +43,9 @@ RUN  npm i rendertron  &&  \
 
 COPY .   /app
 WORKDIR  /app
-
+# ^^ 320MB
 
 RUN npm i  &&  cd docker  &&  npm i  &&  npm cache clean --force
-# ^^ 450MB (60MB just for eslint)
 
 
 # NOW slide in our chromium version instead
@@ -52,6 +53,7 @@ RUN ln -s /app/node_modules/puppeteer-core  /app/node_modules/puppeteer  &&  \
     mv /tmp/rendertron  /app/node_modules/rendertron  &&  \
     sed -i 's=puppeteer.launch({=puppeteer.launch({executablePath:"/tmp/chromium",=' \
       /app/node_modules/rendertron/build/rendertron.js
+# ^^ 374MB
 
 
 RUN rm -rfv          /usr/share/nginx/html  &&  \
@@ -62,4 +64,5 @@ RUN rm -rfv          /usr/share/nginx/html  &&  \
     ln -s  /app/docker/aliases       /root/.aliases
 
 CMD [ "/app/docker/superv" ]
-# ^^ 450MB
+# NOTE: was 268MB Feb25, 2020
+# ^^ 374MB
