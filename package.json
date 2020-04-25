@@ -1,5 +1,6 @@
 {
   "name": "offshoot",
+  "type": "module",
   "browserslist": [
     "> 1%"
   ],
