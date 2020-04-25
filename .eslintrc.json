@@ -1,8 +1,7 @@
 {
   // "used by npm package.json for cmd: npm test"
 
-  "extends": "airbnb",
-  "parser": "babel-eslint",
+  "extends": "airbnb-base",
   "plugins": [
     "compat"
   ],
@@ -12,26 +11,24 @@
     "jest": true
   },
   "settings": {
-    // Mark these as polyfilled - since we include @see `includes/js/polyfill.js` on every page.
-    // We do this so lint testing won't squawk about Promise not being supported in IE 11.
-    // Keep this list sync-ed with @see `includes/js/polyfill.js`
+    // Mark these as polyfilled - so linting won't squawk about Promise not being supported in IE 11.
     "polyfills": [
-      "Array.from",
-      "Promise",
-      "Object.assign",
-      "window.customElements"
+      "Array.from", // xxx archive.js disabilityEligibility.js
+      "Promise",        // xxx polyfill lies - no IE, no opera mini
+      "Object.entries", // xxx polyfill lies
+      "Object.values"   // xxx polyfill lies
     ]
   },
   "rules": {
+    // allow `import .. from '.js'` (.js suffix) in JS files
+    "import/extensions": ["off"],
+
     // this just showed up w/ babel + eslint updates to latest versions Sep1,2019
     "operator-linebreak": "off",
     "import/no-cycle": "off", // it's ok to have cycles with ES Modules and import
 
     // "make sure all used JS compatible with 90%+ of currently used browsers a la caniuse.com"
     "compat/compat": "error",
-
-    // "allow JSX in .js files"
-    "react/jsx-filename-extension": "off",
 
     // "allow snakecase var names if dev desires"
     "camelcase": "off",
@@ -58,14 +55,6 @@
     "indent": ["error", 2, {"CallExpression": {"arguments": "first"},
                             "ArrayExpression": "first",
                             "FunctionDeclaration": {"parameters": "first"},
-                            "FunctionExpression": {"body": 1, "parameters": 2} }],
-
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": ["**/webpack.*.js", "**/*.test.js"]
-    }],
-
-    // "Turning these off since they throw errors for devDependencies"
-    "import/no-unresolved": ["off"],
-    "import/extensions": ["off"]
+                            "FunctionExpression": {"body": 1, "parameters": 2} }]
   }
 }
