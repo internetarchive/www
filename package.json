@@ -11,13 +11,10 @@
     "whatwg-fetch": ""
   },
   "devDependencies": {
-    "babel-eslint": "",
     "eslint": "",
-    "eslint-config-airbnb": "latest",
+    "eslint-config-airbnb-base": "",
     "eslint-plugin-compat": "",
     "eslint-plugin-import": "",
-    "eslint-plugin-jsx-a11y": "",
-    "eslint-plugin-react": "",
     "http-server": "",
     "snowpack": ""
   },

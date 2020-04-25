@@ -11,21 +11,20 @@ RUN apt-get -yqq update  && \
 # for sanity:
 procps \
 zsh \
+wget \
 \
 # for inflated /tmp/chromium binary: \
 libnspr4 \
 libnss3 \
 \
-# for yarn: \
+# for https: \
 ca-certificates \
-gnupg \
-wget \
 ' |fgrep -v '#')  && \
-    wget -qO- https://dl.yarnpkg.com/debian/pubkey.gpg |apt-key add -  && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" |tee /etc/apt/sources.list.d/yarn.list  && \
-    apt-get -yqq update  && \
-    apt-get -yqq --no-install-recommends install yarn nodejs
-# ^^ 204MB
+    wget -qO- https://deb.nodesource.com/setup_14.x |bash -  && \
+    apt-get -yqq --no-install-recommends nodejs
+# ^^ 170MB before node/npm setup
+# ^^ 206MB before node/npm install
+# ^^ 309MB after  node/npm install
 
 
 # to save nearly 500MB, we're going to download a massively compressed/optimized chromium instead...
@@ -33,20 +32,19 @@ ENV  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 
 # Bleah, skip 100MB of _dependencies_ when we just need the JS for this one pkg. 🦀
-# Use `yarn cache dir` to find cache dir to wipe.
 WORKDIR /tmp
-RUN  yarn add rendertron  &&  \
+RUN  npm i rendertron  &&  \
      mv node_modules/rendertron .  &&  \
      find node_modules -delete  &&  \
-     find /usr/local/share/.cache/yarn -delete
+     npm cache clean --force
 
 
 COPY .   /app
 WORKDIR  /app
 
 
-RUN yarn  &&  cd docker  &&  yarn  &&  find /usr/local/share/.cache/yarn -delete
-# ^^ 349MB (60MB just for eslint)
+RUN npm i  &&  cd docker  &&  npm i  &&  npm cache clean --force
+# ^^ 450MB (60MB just for eslint)
 
 
 # NOW slide in our chromium version instead
@@ -64,4 +62,4 @@ RUN rm -rfv          /usr/share/nginx/html  &&  \
     ln -s  /app/docker/aliases       /root/.aliases
 
 CMD [ "/app/docker/superv" ]
-# ^^ 349MB
+# ^^ 450MB
