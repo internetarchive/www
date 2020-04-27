@@ -20,7 +20,7 @@
   },
   "scripts": {
     "test": "node_modules/.bin/eslint .",
-    "postinstall": "mkdir -p www/js/build  &&  snowpack  &&  cp -pr  node_modules/@webcomponents/webcomponentsjs  www/js/build/  &&  ( [ -e /.dockerenv ]  ||  scripts/get-mdapi-json.sh )",
+    "postinstall": "mkdir -p www/js/build  &&  npx snowpack  &&  cp -pr  node_modules/@webcomponents/webcomponentsjs  www/js/build/  &&  ( [ -e /.dockerenv ]  ||  scripts/get-mdapi-json.sh )",
     "serve": "( sleep 2; open http://localhost:8888 ) & node_modules/.bin/http-server www -p 8888 --proxy http://localhost:8888?"
   },
   "vaadin": {
