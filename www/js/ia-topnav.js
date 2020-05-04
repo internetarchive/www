@@ -13,16 +13,24 @@ import URLSearchParams from './build/@ungap/url-search-params.js';
  */
 
 const params = new URLSearchParams(window.location.search);
-const options = {
-  username: '',
-  screenName: '',
-  eventCategory: 'MobileTopNav',
+const config = {
   baseUrl: 'archive.org',
+  catUrl: 'https://catalogd.archive.org',
   waybackUrl: 'web.archive.org',
+  screenName: '',
+  username: '',
+  eventCategory: '',
+  waybackPagesArchived: '424 billion',
+  isAdmin: false,
+  identifier: '',
+  uploader: '',
+  biblio: '',
+  hiddenSearchOptions: ['RADIO'],
 };
 
+
 params.forEach((val, key) => {
-  options[key] = val;
+  config[key] = val;
 });
 
-document.body.innerHTML = `<ia-topnav config='${JSON.stringify(options)}'></ia-topnav>`;
+document.body.innerHTML = `<ia-topnav config='${JSON.stringify(config)}'></ia-topnav>`;
