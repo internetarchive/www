@@ -14,11 +14,11 @@ https://internetarchive-www.dev.archive.org
 
 ## quickstart
 - `git clone git@gitlab.com:internetarchive/www`
-- `cd www  &&  yarn  &&  yarn serve`
+- `cd www  &&  npm i  &&  npm run serve`
 
 
 ## local/offline dev
-- `yarn serve` is the typical way to run a local/minimal http file server at http://localhost:8888
+- `npm run serve` is the typical way to run a local/minimal http file server at http://localhost:8888
 - Other http servers do fine too, but need to send urls (that don't map to files) to `/index.html` (single page application)
 - Alternatively, this `chrome extension` is convenient
   - https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb

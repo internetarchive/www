@@ -1,5 +1,6 @@
 {
   "name": "offshoot",
+  "type": "module",
   "browserslist": [
     "> 1%"
   ],
@@ -12,20 +13,17 @@
     "whatwg-fetch": ""
   },
   "devDependencies": {
-    "babel-eslint": "",
     "eslint": "",
-    "eslint-config-airbnb": "latest",
+    "eslint-config-airbnb-base": "",
     "eslint-plugin-compat": "",
     "eslint-plugin-import": "",
-    "eslint-plugin-jsx-a11y": "",
-    "eslint-plugin-react": "",
     "http-server": "",
-    "snowpack": ""
+    "snowpack": "1.7.1"
   },
   "scripts": {
-    "test": "node_modules/.bin/eslint .",
-    "postinstall": "mkdir -p www/js/build  &&  snowpack  &&  cp -pr  node_modules/@webcomponents/webcomponentsjs  www/js/build/  &&  ( [ -e /.dockerenv ]  ||  scripts/get-mdapi-json.sh )",
-    "serve": "( sleep 2; open http://localhost:8888 ) & node_modules/.bin/http-server www -p 8888 --proxy http://localhost:8888?"
+    "test": "eslint .",
+    "postinstall": "mkdir -p www/js/build  &&  npx snowpack  &&  cp -pr  node_modules/@webcomponents/webcomponentsjs  www/js/build/  &&  ( [ -e /.dockerenv ]  ||  scripts/get-mdapi-json.sh )",
+    "serve": "( sleep 2; open http://localhost:8888 ) & http-server www -p 8888 --proxy http://localhost:8888?"
   },
   "vaadin": {
     "disableUsageStatistics": true
