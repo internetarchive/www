@@ -45,7 +45,8 @@ COPY .   /app
 WORKDIR  /app
 # ^^ 320MB
 
-RUN ( mkdir node_modules  &&  cd docker  &&  npm i  &&  npm cache clean --force )  &&  npm i  &&  npm cache clean --force
+RUN ( mkdir node_modules  &&  cd docker  &&  npm i  &&  npm cache clean --force )  &&  \
+    npm i  &&  npm run postinstall  &&  npm cache clean --force
 
 
 # NOW slide in our chromium version instead
