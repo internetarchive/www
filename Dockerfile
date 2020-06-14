@@ -45,7 +45,7 @@ COPY .   /app
 WORKDIR  /app
 # ^^ 320MB
 
-RUN npm i  &&  npm run postinstall  &&  cd docker  &&  npm i  &&  npm cache clean --force
+RUN npm i  &&  cd docker  &&  npm i  &&  npm cache clean --force
 
 
 # NOW slide in our chromium version instead
