@@ -14,9 +14,10 @@
     // Mark these as polyfilled - so linting won't squawk about Promise not being supported in IE 11.
     "polyfills": [
       "Array.from", // xxx archive.js disabilityEligibility.js
-      "Promise",        // xxx polyfill lies - no IE, no opera mini
-      "Object.entries", // xxx polyfill lies
-      "Object.values"   // xxx polyfill lies
+      "Promise",           // xxx polyfill lies - no IE, no opera mini
+      "Object.entries",    // xxx polyfill lies
+      "Object.values",     // xxx polyfill lies
+      "Object.fromEntries" // xxx polyfill lies - no IE, no Edge v18
     ]
   },
   "rules": {

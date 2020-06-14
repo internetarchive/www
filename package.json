@@ -16,7 +16,7 @@
     "eslint-plugin-compat": "",
     "eslint-plugin-import": "",
     "http-server": "",
-    "snowpack": ""
+    "snowpack": "1.7.1"
   },
   "scripts": {
     "test": "eslint .",
