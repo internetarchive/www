@@ -1,11 +1,18 @@
 
 /* eslint-disable semi */
-import { LitElement, html, css } from '../web_modules/lit-element.js'
+import { LitElement, html, css } from '../build/lit-element.js'
 
 // eslint-disable-next-line import/prefer-default-export
 export class ManageItems extends LitElement {
   static get properties() {
-    return {}
+    return {
+      str: { type: String },
+    }
+  }
+
+  constructor() {
+    super()
+    this.str = ''
   }
 
   static get styles() {
@@ -13,7 +20,7 @@ export class ManageItems extends LitElement {
   }
 
   render() {
-    return html``
+    return html`${this.str}`
   }
 }
 
