@@ -23,6 +23,9 @@
     // allow `import .. from '.js'` (.js suffix) in JS files
     "import/extensions": ["off"],
 
+    // this just showed up as necessary w/ `npm i` on Jun11, 2020
+    "no-multiple-empty-lines": [2, {"max": 2}],
+
     // this just showed up w/ babel + eslint updates to latest versions Sep1,2019
     "operator-linebreak": "off",
     "import/no-cycle": "off", // it's ok to have cycles with ES Modules and import

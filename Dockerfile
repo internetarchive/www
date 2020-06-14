@@ -45,7 +45,7 @@ COPY .   /app
 WORKDIR  /app
 # ^^ 320MB
 
-RUN npm i  &&  cd docker  &&  npm i  &&  npm cache clean --force
+RUN ( mkdir node_modules  &&  cd docker  &&  npm i  &&  npm cache clean --force )  &&  npm i  &&  npm cache clean --force
 
 
 # NOW slide in our chromium version instead
@@ -64,5 +64,4 @@ RUN rm -rfv          /usr/share/nginx/html  &&  \
     ln -s  /app/docker/aliases       /root/.aliases
 
 CMD [ "/app/docker/superv" ]
-# NOTE: was 268MB Feb25, 2020
-# ^^ 369MB
+# ^^ 348MB
