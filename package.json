@@ -7,6 +7,7 @@
   "dependencies": {
     "@vaadin/router": "",
     "@webcomponents/webcomponentsjs": "",
+    "lambdafs": "",
     "lit-element": "",
     "whatwg-fetch": ""
   },
