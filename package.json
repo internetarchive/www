@@ -9,11 +9,12 @@
     "@ungap/url-search-params": "^0.1.4",
     "@vaadin/router": "",
     "@webcomponents/webcomponentsjs": "",
+    "lambdafs": "",
     "lit-element": "",
     "whatwg-fetch": ""
   },
   "devDependencies": {
-    "eslint": "",
+    "eslint": "7.2.0",
     "eslint-config-airbnb-base": "",
     "eslint-plugin-compat": "",
     "eslint-plugin-import": "",
