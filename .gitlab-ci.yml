@@ -1,3 +1,7 @@
+variables:
+  NOMAD__HOSTNAME: 'rendertron.archive.org'
+
+
 include:
   - remote: 'https://gitlab.com/internetarchive/nomad/-/raw/master/.gitlab-ci.yml'
 
