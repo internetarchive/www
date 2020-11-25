@@ -1,5 +1,7 @@
 variables:
   NOMAD__HOSTNAME: 'rendertron.archive.org'
+  # https://learn.hashicorp.com/tutorials/nomad/job-rolling-update
+  NOMAD__JOB_GROUP: 'count = 2'
 
 
 include:
