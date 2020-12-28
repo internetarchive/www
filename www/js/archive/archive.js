@@ -1351,7 +1351,7 @@ class AJS {
           log('STALKING...')
           $.ajax({
             type: 'GET',
-            url: '/catalog_status.php?where=task_id='.concat(task_id, '&rand=', Math.random()),
+            url: '/catalog_status.php?task_ids='.concat(task_id, '&rand=', Math.random()),
             dataType: 'xml',
             success: (xml) => {
               log(xml)
