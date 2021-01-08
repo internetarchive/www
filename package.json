@@ -11,7 +11,7 @@
     "whatwg-fetch": ""
   },
   "devDependencies": {
-    "eslint": "7.2.0",
+    "eslint": "",
     "eslint-config-airbnb-base": "",
     "eslint-plugin-compat": "",
     "eslint-plugin-import": "",
