@@ -1,8 +1,5 @@
 FROM node:alpine
 
-# xxx utf8/locales..
-ENV DEBIAN_FRONTEND=noninteractive
-
 RUN apk add  \
     # needs:
     nginx  zsh  \
@@ -21,4 +18,4 @@ RUN for i in $(find etc -type f); do ( set -x; ln -sf /app/$i /$i ); done  &&  \
     # bizarre missing subdir from nginx pkg:
     mkdir -m 777 /run/nginx
 
-CMD [ "/usr/sbin/nginx", "-g", "'daemon off;'" ]
+CMD /usr/sbin/nginx -g 'daemon off;'
