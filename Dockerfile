@@ -15,8 +15,10 @@ WORKDIR  /app
 RUN npm i  &&  npm run postinstall  &&  npm cache clean --force
 
 
-RUN for i in $(find etc -type f); do set -x; ln -sf /app/$i /$i; set +x; done  &&  \
-    ln -s  /app/docker/zshrc         /root/.zshrc  &&  \
-    ln -s  /app/docker/aliases       /root/.aliases
+RUN for i in $(find etc -type f); do ( set -x; ln -sf /app/$i /$i ); done  &&  \
+    ln -s  /app/docker/zshrc     /root/.zshrc  &&  \
+    ln -s  /app/docker/aliases   /root/.aliases  \
+    # bizarre missing subdir from nginx pkg:
+    mkdir -m777 /run/nginx
 
-CMD [ "nginx", "-g", "'daemon off;'" ]
+CMD [ "/usr/sbin/nginx", "-g", "'daemon off;'" ]
