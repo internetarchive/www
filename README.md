@@ -5,6 +5,7 @@ https://internetarchive-www.dev.archive.org
 
 ## uses rendertron for SEO / crawlers
 
+
 ## working
 - basic search
 - playlist API ported PHP => JS
@@ -12,9 +13,15 @@ https://internetarchive-www.dev.archive.org
 - other items currently look for 'original' imagery to display in theatre
 
 
+## requirements
+- `zsh` and `jq` (for preseeding a selection of offline mode items)
+
+
 ## quickstart
 - `git clone git@gitlab.com:internetarchive/www`
 - `cd www  &&  npm i  &&  npm run serve`
+
+---
 
 
 ## local/offline dev
