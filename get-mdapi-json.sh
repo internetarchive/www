@@ -3,9 +3,7 @@
 # gets a bunch of item MDAPI JSON - esp. for offline testing
 
 mydir=${0:a:h}
-cd $mydir/..
-
-[ -e /.dockerenv ]  &&  exit 0  # don't need to run this in CI/CD and don't need in production
+cd $mydir
 
 mkdir -p www/json
 
