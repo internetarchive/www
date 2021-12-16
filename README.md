@@ -24,13 +24,5 @@ https://internetarchive-www.dev.archive.org
 
 ## xxx
 ```
-gg bootstrap
-gg node_modules
-gg web_modules
-gg js/build
-gg npm
-gg node
-gg -F process.
-gg import
-gg av/
+www/examples/slot.html
 ```
