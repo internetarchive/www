@@ -1,8 +1,7 @@
-/* eslint-disable semi */
+import { Router } from 'https://esm.archive.org/@vaadin/router'
 
-import { Router } from './build/@vaadin/router.js'
 import MDAPI from './mdapi.js'
-import log from './util/log.js'
+import { log } from './util/log.js'
 
 
 const routeFN = (mdapi = null, type = null) => {

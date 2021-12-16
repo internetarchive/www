@@ -1,7 +1,3 @@
-/* eslint-disable semi */
-
-import './build/whatwg-fetch.js' // polyfill for 'fetch' for IE and oldsters..
-
 /**
  * Fetches MDAPI REST API for an item and additionally tries to classify the page 'type'.
  */
@@ -28,7 +24,7 @@ class MDAPI {
 
     // eslint-disable-next-line compat/compat
     const response = await fetch(window.navigator.onLine === false
-      ? `http://localhost:8888/json/${this.id}.json`
+      ? `http://localhost:5000/json/${this.id}.json`
       : url)
     return response.json()
   }
