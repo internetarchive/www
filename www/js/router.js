@@ -37,13 +37,19 @@ const routeFN = (mdapi = null, type = null) => {
 }
 
 
-// see if we're a /details/ page url -- because we need to MDAPI fetch _first_ before we know
-// exactly where we should route to
-const id = (location.pathname.match(/^\/details\/([^&?/]+)/) || ['', ''])[1]
-if (id !== '') {
-  // eslint-disable-next-line no-new
-  new MDAPI(id, routeFN)
-} else {
-  // not /details/ page
-  routeFN()
+async function main() {
+  // see if we're a /details/ page url -- because we need to MDAPI fetch _first_ before we know
+  // exactly where we should route to
+  const id = (location.pathname.match(/^\/details\/([^&?/]+)/) || ['', ''])[1]
+  if (id !== '') {
+    const mdapi = await MDAPI(id)
+    const type = (mdapi.metadata.mediatype === 'collection' ? 'collection' : 'item')
+    routeFN(mdapi, type)
+  } else {
+    // not /details/ page
+    routeFN()
+  }
 }
+
+// eslint-disable-next-line
+void main()
