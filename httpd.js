@@ -1,9 +1,12 @@
 #!/usr/bin/env -S deno run --allow-net --allow-read --location=https://archive.org
 
+// import a deno std. minimal webserver capable of static file serving, that's been lightly modified
+// to _also_ be able to run JS code (since we need to handle /details/IDENTIFIER urls/paths).
 import main from 'https://raw.githubusercontent.com/traceypooh/deno_std/main/http/file_server.ts'
 
 import { warn } from './www/js/util/log.js'
 
+// the static server will call this if it was about to otherwise 404
 function handler(req) {
   const headers = new Headers()
   headers.append('content-type', 'text/html')
