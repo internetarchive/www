@@ -4,18 +4,18 @@ import main from 'https://raw.githubusercontent.com/traceypooh/deno_std/main/htt
 
 import { warn } from './www/js/util/log.js'
 
-async function handler(req) {
+function handler(req) {
   const headers = new Headers()
+  headers.append('content-type', 'text/html')
+
   try {
     const parsed = new URL(req.url)
 
     // main website /details/IDENTIFIER logical rewrite
     if (parsed.pathname.startsWith('/details/')) {
       // main website
-      const main_page = Deno.readTextFileSync('./www/index.html')
-      headers.append('content-type', 'text/html')
       return Promise.resolve(new Response(
-        main_page,
+        Deno.readTextFileSync('./www/index.html'),
         { status: 200, headers },
       ))
     }

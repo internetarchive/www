@@ -31,4 +31,4 @@ class MDAPI {
 }
 
 
-export { MDAPI as default }
+export default MDAPI
