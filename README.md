@@ -11,7 +11,9 @@ git clone git@gitlab.com:internetarchive/www
 
 
 ## local/offline dev
-```./httpd.js -p 5000 --cors www```
+```
+./httpd.js -p 5000 --cors www
+```
 will run a local/minimal http file server at http://localhost:5000
 
 ## offline with preseeded items
