@@ -1,5 +1,8 @@
 FROM denoland/deno:alpine
 
+# needed for `env -S`
+RUN apk add coreutils
+
 WORKDIR /app
 COPY . .
 
