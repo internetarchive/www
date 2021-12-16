@@ -6,3 +6,10 @@ lint:
   image: registry.gitlab.com/internetarchive/eslint/main
   script:
     - /app/lint
+
+test:
+  stage: test
+  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHA}
+  script:
+    - cd /app
+    - ./test/test.sh

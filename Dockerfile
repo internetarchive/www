@@ -1,7 +1,7 @@
 FROM denoland/deno:alpine
 
-# needed for `env -S`
-RUN apk add coreutils
+# `coreutils` for `env -S`
+RUN apk add zsh coreutils
 
 WORKDIR /app
 COPY . .
