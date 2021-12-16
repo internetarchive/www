@@ -1,7 +1,9 @@
-/* eslint-disable semi */
 /**
  * onclick handling utility -- esp. removes repeated copy/paste for preventing default
  */
+
+/* global $ */
+
 
 /**
  * Attaches a click handler to a jQuery selector
@@ -28,12 +30,12 @@ function onclick(selector, callback, retval = 'false', children_selector = null)
     if (retval === 'default')
       return true
 
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.preventDefault  && evt.preventDefault()
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.stopPropagation && evt.stopPropagation()
     return false
   })
 }
 
-export { onclick as default }
+export default onclick

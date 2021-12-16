@@ -1,11 +1,8 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
 import './item-tiles.js'
 
-import './build/whatwg-fetch.js' // polyfill for 'fetch' for IE and oldsters..
-
-// import log from './util/log.js'
+// import { log } from './util/log.js'
 
 
 // eslint-disable-next-line import/prefer-default-export
@@ -49,12 +46,9 @@ form > div {
 `
   }
 
-  updated(props) {
-    if (props.has('query')) {
-      this.search().then((hits) => {
-        this.hits = hits
-      })
-    }
+  async updated(props) {
+    if (props.has('query'))
+      this.hits = await this.search()
   }
 
   async search() {
@@ -66,7 +60,6 @@ form > div {
     if (scrape) {
       const url = `https://archive.org/services/search/v1/scrape?count=100&fields=${this.fields.join(',')}&q=${this.query}`
 
-      // eslint-disable-next-line compat/compat
       const response = await fetch(url)
       const json = await response.json()
       return json.items
@@ -74,7 +67,6 @@ form > div {
 
     const url = `https://archive.org/advancedsearch.php?output=json&q=${this.query}&fl[]=${this.fields.join('&fl[]=')}`
 
-    // eslint-disable-next-line compat/compat
     const response = await fetch(window.navigator.onLine === false
       ? 'http://localhost:8888/json/search.json'
       : url)
@@ -82,17 +74,15 @@ form > div {
     return json.response.docs
   }
 
-  submitted(evt) {
+  async submitted(evt) {
     try {
       this.query = evt.target.querySelector('input').value
-    } catch (e) {
+    } catch {
       // wallpaper over _whatever tf_ that was xxx
       this.query = this.shadowRoot.getElementById('query').value
     }
 
-    this.search().then((hits) => {
-      this.hits = hits
-    })
+    this.hits = await this.search()
   }
 
   render() {

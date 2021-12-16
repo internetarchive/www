@@ -1,16 +1,18 @@
-/* eslint-disable semi */
 // Video/Audio/TV related playback javascript - wrapping and extensions to jwplayer
 // For /details/[IDENTIFIER]  and  /embed/[IDENTIFIER]  and  TV pages and more
 
-// eslint-disable-next-line import/no-named-as-default
-import $ from '../util/jquery.js'
+import $ from 'https://esm.archive.org/jquery@^3.6.0'
+
+/* eslint-disable-next-line import/no-named-as-default */
 import cgiarg from '../util/cgiarg.js'
-import log from '../util/log.js'
+import { log } from '../util/log.js'
 import onclick from '../util/onclick.js'
-import Related from '../related/related.js'
 import { jwplayer, jwbase } from '../jwplayer/jwplayer.js'
 import Playset from '../playset/playset.js'
-import AJS from '../archive/archive.js'
+
+const Related = undefined // import Related from '../related/related.js' // xxx
+const AJS = undefined // import AJS from '../archive/archive.js' // xxx
+
 
 /* TBD?
 - psuedostreaming
@@ -206,7 +208,7 @@ class Play {
           val.sources = [{ file: val.file, height: 480 }]
         }
         if (typeof val.sources === 'undefined') {
-          // eslint-disable-next-line  no-alert
+          /* eslint-disable-next-line  no-alert */
           alert(`${idx}: sources undefined!`) // xxx
         } else {
           // setup for metadata when preload happens for 1st track, dont count as item play
@@ -536,7 +538,7 @@ class Play {
 
 
     // xxx v6.8 for /details/anamorphic has wrong width in flash mode! so squishface unlike v6.1
-    this.adjustVideoWidth = (player, onMetaSizing) => {
+    this.adjustVideoWidth = (_player, onMetaSizing) => {
       if (onMetaSizing.height  &&  onMetaSizing.width  &&  onMetaSizing.height > 0  &&
           onMetaSizing.width > 0  &&  (parseInt(onMetaSizing.height, 10) > 0)) {
         DAR = parseInt(onMetaSizing.width, 10) / parseInt(onMetaSizing.height, 10)
@@ -662,7 +664,7 @@ class Play {
         const file = decodeURIComponent(mat[1].replace(/\+/g, '%20'))
         log('looking for: ', file)
         // log(playlist)
-        // eslint-disable-next-line  guard-for-in
+        /* eslint-disable-next-line  guard-for-in */
         for (const ii in playlist) {
           const idx = Number(ii) // convert from string!
           if (playlist[idx].orig === file) {
@@ -1049,7 +1051,7 @@ class Play {
 
 
     this.debug = () => {
-      // eslint-disable-next-line  no-debugger
+      /* eslint-disable-next-line  no-debugger */ // deno-lint-ignore  no-debugger
       debugger
     }
 
@@ -1139,7 +1141,7 @@ class Play {
 
 
     this.cache = () => {
-      // eslint-disable-next-line  no-alert
+      /* eslint-disable-next-line  no-alert */
       if (!jid) return alert('please pass in a unique identifier for this object')
       if (typeof stash[jid] !== 'undefined') {
         if (typeof playlist === 'undefined')
@@ -1151,12 +1153,12 @@ class Play {
 
 
     const cached = this.cache()
-    if (cached)
-      return cached
+    // eslint-disable-next-line no-constructor-return
+    if (cached) return cached
 
     stash[jid] = this // stash a pointer so that a repeat call to Play(jid) returns prior object
 
-    // eslint-disable-next-line  prefer-rest-params
+    /* eslint-disable-next-line  prefer-rest-params */
     log('PLAY CONFIG:', arguments[2])
 
     this.construct()
@@ -1240,15 +1242,13 @@ class Play {
 
   static cast_sender_setup() {
     if (!window.chrome  ||  window.chrome.cast)
-      return // not chrome or already loaded -- noop!
+      return; // not chrome or already loaded -- noop!
 
     /* NOTE: the minified code below is pasted (Mar 2018) from:
         https://www.gstatic.com/cv/js/sender/v1/cast_sender.js
       */
-    /* eslint-disable */
+    /* eslint-disable-next-line */ // deno-lint-ignore no-var, no-inner-declarations
     (function() {var e=function(a){return!!document.currentScript&&(-1!=document.currentScript.src.indexOf("?"+a)||-1!=document.currentScript.src.indexOf("&"+a))},f=e("loadGamesSDK")?"/cast_game_sender.js":"/cast_sender.js",g=e("loadCastFramework")||e("loadCastApplicationFramework"),h=function(){return"function"==typeof window.__onGCastApiAvailable?window.__onGCastApiAvailable:null},k=["pkedcjkdefgpdelpbcmbmeomcjbeemfm","enhhojjnijigcajfphajepfemndkmdlo"],m=function(a){a.length?l(a.shift(),function(){m(a)}):n()},p=function(a){return"chrome-extension://"+a+f},l=function(a,c,b){var d=document.createElement("script");d.onerror=c;b&&(d.onload=b);d.src=a;(document.head||document.documentElement).appendChild(d)},q=function(a){return 0<=window.navigator.userAgent.indexOf(a)},n=function(){var a=h();a&&a(!1,"No cast extension found")},r=function(){if(g){var a=2,c=h(),b=function(){a--;0==a&&c&&c(!0)};window.__onGCastApiAvailable=b;l("//www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js",n,b)}};if(q("CriOS")){var t=window.__gCrWeb&&window.__gCrWeb.message&&window.__gCrWeb.message.invokeOnHost;t&&(r(),t({command:"cast.sender.init"}))}else if(q("Android")&&q("Chrome/")&&window.navigator.presentation){r();var u=window.navigator.userAgent.match(/Chrome\/([0-9]+)/);m(["//www.gstatic.com/eureka/clank/"+(u?parseInt(u[1],10):0)+f,"//www.gstatic.com/eureka/clank"+f])}else window.chrome&&window.navigator.presentation&&!q("Edge")?(r(),m(k.map(p))):n();})();
-    /* eslint-enable */
-    /* eslint-disable semi */
   }
 
 
@@ -1323,7 +1323,7 @@ class Play {
    * Runs setup (for pages with embedded data divs in them)
    */
   static setup() {
-    $('.js-play8-config').each((idx, e) => {
+    $('.js-play8-config').each((_idx, e) => {
       const id = 'jw6'
       const $e = $(e)
       const config = JSON.parse($e.val())
@@ -1363,4 +1363,4 @@ if (IE)
 else
   $(Play.setup) // run on DOM ready (as typical)
 
-export { Play as default }
+export default Play

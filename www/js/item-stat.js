@@ -1,7 +1,6 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
-// eslint-disable-next-line import/prefer-default-export
+/* eslint-disable-next-line import/prefer-default-export */
 customElements.define('item-stat', class ItemStat extends LitElement {
   static get properties() {
     return {

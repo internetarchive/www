@@ -1,7 +1,8 @@
-/* eslint-disable semi */
 /**
  * onsubmit handling utility -- esp. removes repeated copy/paste for preventing default
  */
+
+/* global $ */
 
 /**
  * Attaches a submit handler to a jQuery selector
@@ -26,12 +27,12 @@ function onsubmit(selector, callback, retval = 'false') {
     if (retval === 'default')
       return true
 
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.preventDefault  && evt.preventDefault()
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.stopPropagation && evt.stopPropagation()
     return false
   })
 }
 
-export { onsubmit as default }
+export default onsubmit

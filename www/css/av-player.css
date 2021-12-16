@@ -3,10 +3,6 @@
 .topinblock {
   vertical-align: top;
   display: inline-block;
-  /*for IEv8, at least:*/
-  *display: inline;
-  /*for IEv7:*/
-  zoom: 1;
 }
 .roundbox {
   border-radius: 5px;

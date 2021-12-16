@@ -1,9 +1,8 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
 import './item-stat.js'
 
-// eslint-disable-next-line import/prefer-default-export
+/* eslint-disable-next-line import/prefer-default-export */
 export class ItemTile extends LitElement {
   static get properties() {
     return {

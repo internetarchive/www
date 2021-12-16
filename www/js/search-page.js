@@ -1,5 +1,4 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
 import './search-results.js'
 import cgiarg from './util/cgiarg.js'
@@ -30,14 +29,13 @@ export class SearchPage extends LitElement {
 
   render() {
     return html`
-<a href="https://git.archive.org/www/www">
+<a href="https://gitlab.com/internetarchive/www">
   <img style="float:right; height:75px; width:75px; border-radius:38px" src="/img/ia3.gif"/>
 </a>
-<h1 style="text-align:center"> JS-based archive.org web components prototype </h1>
-<h2 style="text-align:center"> uses rendertron for SEO / crawlers </h2>
+<h1 style="text-align:center"> archive.org JS Single Page App using web components </h1>
 
 <small style="position:absolute; right:10px; bottom:10px">
-  <i><a href="https://git.archive.org/www/www">repo</a></i>
+  <i><a href="https://gitlab.com/internetarchive/www">repo</a></i>
 </small>
 
 <search-results query="${this.query}"></search-results>

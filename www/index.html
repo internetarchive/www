@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- This loads the app as a module on Chrome, Edge, Firefox, and Safari -->
+  <!-- if we want some polyfills dynamically, eg:
+
+  <script src="https://polyfill.archive.org/v3/polyfill.min.js?features=fetch%2CIntersectionObserver%2CglobalThis%2CElement.prototype.getAttributeNames"></script>
+
+  -->
+
   <!-- Modules are always nonblocking, and they load after regular scripts, so we can put them first -->
   <script type="module" src="/js/router.js"></script>
-
-  <!-- Always load the Webcomponents Polyfill (no-op on browsers that have support) -->
-  <script src="/js/build/webcomponentsjs/webcomponents-bundle.js"></script>
-
-  <script src="/js/jquery-1.10.2.min.js"></script>
 
   <style>
     /* like bootstrap */

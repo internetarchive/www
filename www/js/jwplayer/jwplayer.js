@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 /**
  * ES Module wrapper for jwplayer
  */
@@ -17,4 +16,4 @@ const jwbase = '/jw/8'
 const { jwplayer } = window
 
 export { jwplayer, jwbase }
-export { jwplayer as default }
+export default jwplayer

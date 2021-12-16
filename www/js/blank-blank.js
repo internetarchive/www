@@ -1,5 +1,4 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
 customElements.define('blank-blank', class BlankBlank extends LitElement {
   static get properties() {

@@ -1,9 +1,8 @@
-/* eslint-disable semi */
-import { LitElement, html, css } from './build/lit-element.js'
+import { LitElement, html, css } from 'https://esm.archive.org/lit'
 
 import './item-tile.js'
 
-// eslint-disable-next-line import/prefer-default-export
+/* eslint-disable-next-line import/prefer-default-export */
 export class ItemTiles extends LitElement {
   static get properties() {
     return {
@@ -31,7 +30,7 @@ item-tile {
   }
 
   render() {
-    // eslint-disable-next-line no-console
+    /* eslint-disable-next-line no-console */
     console.log(this.items)
     return html`
 ${this.items.map((item) => html`

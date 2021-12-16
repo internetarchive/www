@@ -1,5 +1,6 @@
 /* eslint-disable */
-import $ from '../util/jquery.js'
+import $ from 'https://esm.archive.org/jquery@^3.0.0'
+
 
 /**
  * Cookie plugin

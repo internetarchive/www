@@ -1,7 +1,7 @@
-/* eslint-disable semi */
-
-import log from './util/log.js'
+import { log } from './util/log.js'
 import cgiarg from './util/cgiarg.js'
+import { friendly_truncate } from './util/strings.js'
+
 
 const FOURK = false // xxx - still needs more work!
 const HIRANK = 100
@@ -40,15 +40,17 @@ const PLAYABLES = Object.fromEntries([
   // FOR AUDIO!
   'vbr mp3',
   'ogg vorbis',
+  'mpeg-4 audio',
   '128kbps mp3',
   '64kbps mp3',
   'mp3 sample',
-  // eslint-disable-next-line no-plusplus
+  /* eslint-disable-next-line no-plusplus */
 ].map((k) => [k, nnn++]))
 
 const AUDIO = [
   'vbr mp3',
   'ogg vorbis',
+  'mpeg-4 audio',
   '128kbps mp3',
   '64kbps mp3',
   'mp3 sample',
@@ -94,8 +96,9 @@ class Player {
 
       if ('original' in fi) {
         // derivative!
-        if (fi.name !== fi.original) // ensure no loops later
-          file2key[fi.name] = fi.original
+        const origfi = typeof fi.original === 'string' ? fi.original : fi.original[0] // array/rare!
+        if (fi.name !== origfi) // ensure no loops later
+          file2key[fi.name] = origfi
       }
 
       if (fi.name.endsWith('.png')  &&  !fi.name.endsWith('_spectrogram.png'))
@@ -118,7 +121,8 @@ class Player {
       let key = filename
       if (deriv) {
         // derivative!
-        key = fi.original
+        key = typeof fi.original === 'string' ? fi.original : fi.original[0]
+
         // handle derivative-of-derivative case -- chase up to top original file
         for (let i = 10; i  &&  (key in file2key); i--)
           key = file2key[key]
@@ -143,7 +147,6 @@ class Player {
           key = "{$m2[1]}{$m2[2]}$origSuffix"
         }
         /* eslint-enable */ // xxxx
-        /* eslint-disable semi */ // xxxx
 
 
         if (typeof key !== 'string')
@@ -186,7 +189,7 @@ class Player {
 
       if ('autoplay' in fi) {
         // NOTE: this is _usually_ used to say "stop at this point in playlist", eg:
-        // eslint-disable-next-line max-len
+        /* eslint-disable-next-line max-len */
         //   /details/78_a-special-collection-of-the-world-famous-music-of-trinidad---calypsos_wilmoth-houdi_gbia0002481
         autoplay[filename] = fi.autoplay
       }
@@ -290,6 +293,7 @@ class Player {
       delete mapper[`${this.identifier}.flac`]
       delete mapper[`${this.identifier}.ogg`]
       delete mapper[`${this.identifier}.mp3`]
+      delete mapper[`${this.identifier}.m4a`]
     }
 
 
@@ -302,7 +306,6 @@ class Player {
 
     // we only care if 2+ (different!) <artist> values are set
     //   eg:  /details/wcd_various-artistsbravo-hits-24_2-4-family_flac_lossless_29950093
-    // eslint-disable-next-line compat/compat
     const vals = Object.values(artists)
     if (vals.length <= 1  ||  [...new Set(vals)].length <= 1)
       artists = {} // all tracks are same artist (or all nothing set for them)
@@ -311,10 +314,9 @@ class Player {
     const countAV  = (this.showing === 'movies' ? nVideo  : nAudio)
 
 
-    // eslint-disable-next-line compat/compat
     for (const [orig, rank2file] of Object.entries(mapper)) {
       if (!(orig in groupsAV)) {
-        // eslint-disable-next-line no-continue
+        /* eslint-disable-next-line no-continue */
         continue
       }
 
@@ -326,19 +328,18 @@ class Player {
 
       // NOTE: rank2file is a sparse, numerical keyed hashmap, _not_ an array
       if (0 in rank2file) {
-        // eslint-disable-next-line prefer-destructuring
+        /* eslint-disable-next-line prefer-destructuring */
         kv.POSTER = rank2file[0]
       } else if (1 in rank2file) {
-        // eslint-disable-next-line prefer-destructuring
+        /* eslint-disable-next-line prefer-destructuring */
         kv.POSTER = rank2file[1]
       } else {
         // ugh, this is terrible -- try to find files named 'FILE.png' that correspond
         // to mp3/ogg files that aren't otherwise found above.  This is so we can group the
         // waveforms PNGs (and, BTW _not_ spectrogram PNG) into the A/V file group.
-        // eslint-disable-next-line compat/compat
         for (const [keykey, valval] of Object.entries(rank2file)) {
           if (parseInt(keykey, 10)) {
-            const png = valval.replace(/(\.ogg|_sample\.mp3|\.mp3)$/i, '.png')
+            const png = valval.replace(/(\.m4a|\.ogg|_sample\.mp3|\.mp3)$/i, '.png')
             if (png !== valval  &&  png in pngs)
               kv.POSTER = png
           }
@@ -349,13 +350,12 @@ class Player {
         kv.AUTOPLAY = false // filter_var(autoplay.orig, FILTER_VALIDATE_BOOLEAN) // xxx
 
 
-      // eslint-disable-next-line compat/compat
       for (const [rank, src] of Object.entries(rank2file)) {
         if (parseInt(rank, 10)  &&  rank > 1) {
           // not a POSTER or TITLE!
           if ((this.showing === 'movies'  &&   audio[src])  ||
               (this.showing !== 'movies'  &&  !audio[src])) {
-            // eslint-disable-next-line no-continue
+            /* eslint-disable-next-line no-continue */
             continue
           }
 
@@ -364,7 +364,7 @@ class Player {
       }
 
       if (!kv.SRC.length) {
-        // eslint-disable-next-line no-continue
+        /* eslint-disable-next-line no-continue */
         continue // no derivatives in video (or audio) group of files, likely!
       }
 
@@ -410,7 +410,6 @@ class Player {
       for (const group of this.groups) {
         let sample_idx = false
         let mp3 = false
-        // eslint-disable-next-line compat/compat
         for (const [idx, src] of Object.entries(group.SRC)) {
           if (src.endsWith('_sample.mp3'))
             sample_idx = idx
@@ -428,7 +427,7 @@ class Player {
    * Aids filtering out MDAPI files.
    * Includes some adjustments we need to ensure in 2+ passes.
    *
-   * @param {Array} fi -- @warn elements can (rarely) be changed/fixed by this method
+   * @param {object} fi -- @warn elements can (rarely) be changed/fixed by this method
    */
   filter(fi) {
     const filename = fi.name
@@ -445,18 +444,18 @@ class Player {
     )) {
       // pretend this mp3 is an original and not "derived from" a JSON/XML file...
       this.haxLP = true
-      // eslint-disable-next-line no-param-reassign
+      /* eslint-disable-next-line no-param-reassign */
       delete fi.original
-      // eslint-disable-next-line no-param-reassign
+      /* eslint-disable-next-line no-param-reassign */
       fi.source = 'original'
     }
 
     if (typeof fi.original === 'string'  &&  fi.original.endsWith('.torrent')) {
       // pretend this files is an original and not "derived from" a torrent
       // eg: /details/DavidBrombergQuintet_2018-10-20_WestcottTheater
-      // eslint-disable-next-line no-param-reassign
+      /* eslint-disable-next-line no-param-reassign */
       delete fi.original
-      // eslint-disable-next-line no-param-reassign
+      /* eslint-disable-next-line no-param-reassign */
       fi.source = 'original'
     }
 
@@ -488,10 +487,10 @@ class Player {
   /**
    * Returns and sets various elements for a JS-based A/V playlist to be added into item.
    *
-   * @param hashmap config - @see play8.js for expected keys/vals
-   * @param boolean ios - does client seem like they are iOS or not?
-   * @param array poster - if empty array, will try to update to array with poster image if possible
-   * @return void
+   * @param {object} config - @see play8.js for expected keys/vals
+   * @param {boolean} ios - does client seem like they are iOS or not?
+   * @param {string} poster - if empty array, tries to update to array w/ poster image if possible
+   * @returns {object[]}
    */
   jwplaylist(config, ios = false, poster = []) {
     const ret = []
@@ -560,15 +559,14 @@ class Player {
     }
     ranks.push('video/x-flv')
     let i = 0
-    // eslint-disable-next-line no-plusplus
+    /* eslint-disable-next-line no-plusplus */
     ranks = Object.fromEntries(ranks.map((k) => [k, i++])) // array_flip()
 
-    // eslint-disable-next-line compat/compat
     for (const group of Object.values(this.groups)) {
       // try to make the new player show as much as it can
       const map = {
         sources: [],
-        title: group.TITLE, // Util::friendlyTruncate(group.TITLE, 100, true)], //xxx
+        title: friendly_truncate(group.TITLE, 100, true),
       }
 
       if ('ORIG' in group) {
@@ -609,16 +607,16 @@ class Player {
         //   Got me Wrong?.mp3
         // and still have it properly detect the suffix and 'type'
         const suffixLC = (
-          (src.match(/(\.(mp3|ogg|ogv|mp4|mpeg4|m4v|mov|flv|swf))$/i)  || []).pop()  ||
-          (src.match(/(\.(mp3|ogg|ogv|mp4|mpeg4|m4v|mov|flv|swf))\?/i) || []).pop()  ||
-          (src.match(/(\.(mp3|ogg|ogv|mp4|mpeg4|m4v|mov|flv|swf))&/i) || []).pop()  ||
+          (src.match(/(\.(mp3|ogg|m4a|ogv|mp4|mpeg4|m4v|mov|flv|swf))$/i)  || []).pop()  ||
+          (src.match(/(\.(mp3|ogg|m4a|ogv|mp4|mpeg4|m4v|mov|flv|swf))\?/i) || []).pop()  ||
+          (src.match(/(\.(mp3|ogg|m4a|ogv|mp4|mpeg4|m4v|mov|flv|swf))&/i)  || []).pop()  ||
           ''
         ).toLowerCase()
 
         // shouldn't *have* to do this, but ifone 1st gen seems to get tripped
         // up otherwise...
         if (ios  &&  (suffixLC === 'ogg' || suffixLC === 'ogv')) {
-          // eslint-disable-next-line no-continue
+          /* eslint-disable-next-line no-continue */
           continue
         }
 
@@ -628,6 +626,7 @@ class Player {
         switch (suffixLC) {
         case 'mp3':    type = 'mp3';                         break
         case 'ogg':    type = 'ogg';                         break
+        case 'm4a':    type = 'aac';                         break
         case 'ogv':    type = 'ogg'; defaultWH = [400, 300]; break
         case 'mp4':    type = 'mp4';                         break
         case 'mpeg4':  type = 'mp4';                         break
@@ -635,7 +634,7 @@ class Player {
         case 'mov':    type = 'mp4';                         break
         case 'flv':    type = 'video/x-flv';                 break
         case 'swf':    type = 'video/x-flv';                 break
-        default:       type = '';
+        default:       type = ''
         }
 
         const width  = (src in this.widths  ? this.widths[src]  : defaultWH[0])
@@ -657,7 +656,7 @@ class Player {
         // we only wanna pick the *first* (best) .mp4 for example, when there are
         // 2+.  eg: /details/dmbb00309   which has .mp4 (deriv) and .mpeg4 (orig)
         if (type  &&  parseInt(height, 10) === parseInt(used[type], 10)) {
-          // eslint-disable-next-line no-continue
+          /* eslint-disable-next-line no-continue */
           continue
         }
         used[type] = height
@@ -678,6 +677,8 @@ class Player {
       /* xxx usort($map['sources'], function ($a, $b) use ($ranks) {
         return ($ranks[$a['type']] > $ranks[$b['type']])
       }) */
+
+      log(config.tv) // for lint, given ^ and v
 
       /* xxx if (isset(this.captions[$idx])) {
         foreach (this.captions[$idx] as $lang => $srtfile) {
@@ -709,4 +710,4 @@ class Player {
 }
 
 
-export { Player as default }
+export default Player

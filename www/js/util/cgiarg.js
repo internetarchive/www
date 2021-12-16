@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 /**
  * Parses a CGI arg
  *
@@ -7,7 +6,10 @@
  *                             try spliting entire url by '&' chars
  *                               eg: /details/commute&autoplay=1
  */
-function cgiarg(theArgName, try_full) {
+function cgiarg(theArgName, try_full = false) {
+  if (typeof location === 'undefined')
+    return ''
+
   const sArgs = (try_full  &&  location.search === ''
     ? location.href.slice(1).split('&')
     : location.search.slice(1).split('&')
@@ -22,4 +24,4 @@ function cgiarg(theArgName, try_full) {
 }
 
 
-export { cgiarg as default }
+export default cgiarg

@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 // Class that iterates over A/V items, playing them in a playlist.
 // JS file can be added to a page and will try to find a place to append a "Play All" link.
 // Whatever items the user sees in their page, when they click "Play All", will get added to a new
@@ -10,10 +9,10 @@
 // xxx share/link as modal?
 // xxx cleanup/improve descriptions for description-less items?
 
-// eslint-disable-next-line import/no-named-as-default
-import $ from '../util/jquery.js'
+import $ from 'https://esm.archive.org/jquery@^3.6.0'
+
 import cgiarg from '../util/cgiarg.js'
-import log from '../util/log.js'
+import { log } from '../util/log.js'
 import onclick from '../util/onclick.js'
 import { jwplayer } from '../jwplayer/jwplayer.js'
 
@@ -106,7 +105,7 @@ class Playset {
     const also_found_clicked = $('#also-found').length
     const selector_tile_finder = (also_found_clicked ? '#also-found .item-ia' : '.item-ia:visible')
 
-    $(selector_tile_finder).each((key, val) => {
+    $(selector_tile_finder).each((_key, val) => {
       const $val = $(val)
       const { id } = $val.data()
       if (id.match(/^__/))
@@ -425,7 +424,7 @@ ${list}
     // Catch error when user has disabled third-party cookies/storage.
     try {
       return 'localStorage' in window
-    } catch (error) {
+    } catch {
       return false
     }
   }
@@ -436,4 +435,4 @@ ${list}
 $(() => new Playset())
 
 
-export { Playset as default }
+export default Playset

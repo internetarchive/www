@@ -1,7 +1,8 @@
-/* eslint-disable semi */
 /**
  * onchange handling utility -- esp. removes repeated copy/paste for preventing default
  */
+
+/* global $ */
 
 /**
  * Attaches an onchange handler to a jQuery selector
@@ -26,12 +27,12 @@ function onchange(selector, callback, retval = 'false') {
     if (retval === 'default')
       return true
 
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.preventDefault  && evt.preventDefault()
-    // eslint-disable-next-line no-unused-expressions
+    /* eslint-disable-next-line no-unused-expressions */
     evt && evt.stopPropagation && evt.stopPropagation()
     return false
   })
 }
 
-export { onchange as default }
+export default onchange
