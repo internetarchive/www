@@ -11,5 +11,4 @@ test:
   stage: test
   image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHA}
   script:
-    - cd /app
     - ./test/test.sh
