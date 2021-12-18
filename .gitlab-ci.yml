@@ -9,6 +9,6 @@ lint:
 
 test:
   stage: test
-  image: ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_SLUG}:${CI_COMMIT_SHA}
+  image: registry.gitlab.com/internetarchive/eslint/main
   script:
-    - ./test/test.sh
+    - /app/test/test.sh

@@ -1,5 +1,5 @@
 // eslint-disable-next-line object-curly-newline
-import { describe, it, expect, run } from '../test.js'
+import { describe, it, expect, run } from 'https://gitlab.com/internetarchive/eslint/-/raw/main/test/test.js'
 
 import {
   array_flip, friendly_truncate, killspace,
