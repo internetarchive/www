@@ -4,19 +4,19 @@
 https://internetarchive-www.dev.archive.org
 
 
-## quickstart
+## Quickstart
 ```
 git clone git@gitlab.com:internetarchive/www
 ```
 
 
-## local/offline dev
+## Local/offline dev
 ```
 ./httpd.js -p 5000 --cors www
 ```
 will run a local/minimal http file server at http://localhost:5000
 
-## offline with preseeded items
+## Offline with preseeded items
 ```
 ./get-mdapi-json.sh
 ```
@@ -27,7 +27,7 @@ will run a local/minimal http file server at http://localhost:5000
 - requires: `zsh` and `jq` (for preseeding a selection of offline mode items)
 
 
-## working
+## Currently working
 - basic search
 - playlist API ported PHP => JS
   - all A/V items working reasonably now
