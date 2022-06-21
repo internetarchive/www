@@ -11,7 +11,9 @@ for ID in \
   commute  gd77-05-08.sbd.hicks.4982.sbeok.shnf  AboutBan1935   goodytwoshoes00newyiala  \
   movies  audio  software  image  texts  tv  etree  \
   prelinger  librivoxaudio  internetarcade  poohBot  \
-  fav-tracey_pooh  @brewster
+  fav-tracey_pooh  @brewster  \
+  Cracker2012-06-02.MarkLynn  drake_saga1_shots  \
+  cd_pure-80s-rocks_various-artists-aldo-nova-autograph-billy
 do
   FI=www/json/$ID.json
   [ -e $FI ]  ||  (
