@@ -2,12 +2,13 @@
 
 // import a deno std. minimal webserver capable of static file serving, that's been lightly modified
 // to _also_ be able to run JS code (since we need to handle /details/IDENTIFIER urls/paths).
-import main from 'https://raw.githubusercontent.com/traceypooh/deno_std/main/http/file_server.ts'
+import main from 'https://deno.land/x/file_server_plus/mod.ts'
 
 import { warn } from './www/js/util/log.js'
 
 // the static server will call this if it was about to otherwise 404
-function handler(req) {
+// eslint-disable-next-line no-undef
+globalThis.finalHandler = (req) => {
   const headers = new Headers()
   headers.append('content-type', 'text/html')
 
@@ -37,4 +38,4 @@ function handler(req) {
   ))
 }
 
-main(handler)
+main()
