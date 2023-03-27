@@ -7,4 +7,4 @@ WORKDIR /app
 COPY . .
 
 USER deno
-CMD ./httpd.js -p 5000 --cors www
+CMD cd www && ../httpd.js
