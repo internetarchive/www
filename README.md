@@ -3,6 +3,7 @@
 ## live site / demo
 https://internetarchive-www.dev.archive.org
 
+leverages native `web components` and lightweight `lit` helper
 
 ## Quickstart
 ```
