@@ -3,12 +3,12 @@ include:
 
 lint:
   stage: test
-  image: registry.gitlab.com/internetarchive/eslint/main
+  image: ghcr.io/internetarchive/dyno:main
   script:
     - /app/lint
 
 test:
   stage: test
-  image: registry.gitlab.com/internetarchive/eslint/main
+  image: ghcr.io/internetarchive/dyno:main
   script:
     - /app/test/test.sh
