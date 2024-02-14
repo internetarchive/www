@@ -758,7 +758,7 @@ class Play {
             'More Formats from Internet Archive')
 
         player.addButton('/images/glogo-jw.png', ttl, () => {
-          window.top.location.href = details
+          globalThis.top.location.href = details
         }, 'btn-ia')
       }
 
@@ -768,7 +768,7 @@ class Play {
             '/jw/embed.png',
             'Embedding Examples and Help',
             () => {
-              window.top.location.href = `/help/video.php?identifier=${identifier}`
+              globalThis.top.location.href = `/help/video.php?identifier=${identifier}`
             },
             'btn-mbd',
           )
@@ -791,7 +791,7 @@ class Play {
           `/images/tv/${identifier.split('_')[0]}.png`,
           `Look for this show on ${tvContributor} website`,
           () => {
-            window.top.location.href = tvSource
+            globalThis.top.location.href = tvSource
           },
           'btn-tv',
         )
@@ -809,7 +809,7 @@ class Play {
       }
 
       if (this.castable()) {
-        if (window.chrome)
+        if (globalThis.chrome)
           Play.cast_sender_setup()
 
         player.addButton(
@@ -832,16 +832,16 @@ class Play {
     }
 
 
-    this.castable = () => (window.WebKitPlaybackTargetAvailabilityEvent  ||  window.chrome)
+    this.castable = () => (globalThis.WebKitPlaybackTargetAvailabilityEvent  ||  globalThis.chrome)
 
 
     this.cast = () => {
-      if (window.WebKitPlaybackTargetAvailabilityEvent) {
+      if (globalThis.WebKitPlaybackTargetAvailabilityEvent) {
         $(`#${jid} video`).get(0).webkitShowPlaybackTargetPicker()
         return
       }
 
-      if (!window.chrome)
+      if (!globalThis.chrome)
         return
 
       const onMediaDiscovered = (how, media) => {
@@ -860,13 +860,13 @@ class Play {
         if (this.cast_retries > 3)
           return false
 
-        if (!window.chrome.cast)
+        if (!globalThis.chrome.cast)
           return setTimeout(cast_setup, this.cast_retries * 1000)
 
         /* Adapted from:
             https://developers.google.com/cast/v2/chrome_sender
         */
-        const { cast } = window.chrome
+        const { cast } = globalThis.chrome
         const sessionRequest =
           new cast.SessionRequest(cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID)
         const apiConfig = new cast.ApiConfig(
@@ -1241,14 +1241,14 @@ class Play {
 
 
   static cast_sender_setup() {
-    if (!window.chrome  ||  window.chrome.cast)
+    if (!globalThis.chrome  ||  globalThis.chrome.cast)
       return; // not chrome or already loaded -- noop!
 
     /* NOTE: the minified code below is pasted (Mar 2018) from:
         https://www.gstatic.com/cv/js/sender/v1/cast_sender.js
       */
     /* eslint-disable-next-line */ // deno-lint-ignore no-var, no-inner-declarations
-    (function() {var e=function(a){return!!document.currentScript&&(-1!=document.currentScript.src.indexOf("?"+a)||-1!=document.currentScript.src.indexOf("&"+a))},f=e("loadGamesSDK")?"/cast_game_sender.js":"/cast_sender.js",g=e("loadCastFramework")||e("loadCastApplicationFramework"),h=function(){return"function"==typeof window.__onGCastApiAvailable?window.__onGCastApiAvailable:null},k=["pkedcjkdefgpdelpbcmbmeomcjbeemfm","enhhojjnijigcajfphajepfemndkmdlo"],m=function(a){a.length?l(a.shift(),function(){m(a)}):n()},p=function(a){return"chrome-extension://"+a+f},l=function(a,c,b){var d=document.createElement("script");d.onerror=c;b&&(d.onload=b);d.src=a;(document.head||document.documentElement).appendChild(d)},q=function(a){return 0<=window.navigator.userAgent.indexOf(a)},n=function(){var a=h();a&&a(!1,"No cast extension found")},r=function(){if(g){var a=2,c=h(),b=function(){a--;0==a&&c&&c(!0)};window.__onGCastApiAvailable=b;l("//www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js",n,b)}};if(q("CriOS")){var t=window.__gCrWeb&&window.__gCrWeb.message&&window.__gCrWeb.message.invokeOnHost;t&&(r(),t({command:"cast.sender.init"}))}else if(q("Android")&&q("Chrome/")&&window.navigator.presentation){r();var u=window.navigator.userAgent.match(/Chrome\/([0-9]+)/);m(["//www.gstatic.com/eureka/clank/"+(u?parseInt(u[1],10):0)+f,"//www.gstatic.com/eureka/clank"+f])}else window.chrome&&window.navigator.presentation&&!q("Edge")?(r(),m(k.map(p))):n();})();
+    (function() {var e=function(a){return!!document.currentScript&&(-1!=document.currentScript.src.indexOf("?"+a)||-1!=document.currentScript.src.indexOf("&"+a))},f=e("loadGamesSDK")?"/cast_game_sender.js":"/cast_sender.js",g=e("loadCastFramework")||e("loadCastApplicationFramework"),h=function(){return"function"==typeof globalThis.__onGCastApiAvailable?globalThis.__onGCastApiAvailable:null},k=["pkedcjkdefgpdelpbcmbmeomcjbeemfm","enhhojjnijigcajfphajepfemndkmdlo"],m=function(a){a.length?l(a.shift(),function(){m(a)}):n()},p=function(a){return"chrome-extension://"+a+f},l=function(a,c,b){var d=document.createElement("script");d.onerror=c;b&&(d.onload=b);d.src=a;(document.head||document.documentElement).appendChild(d)},q=function(a){return 0<=globalThis.navigator.userAgent.indexOf(a)},n=function(){var a=h();a&&a(!1,"No cast extension found")},r=function(){if(g){var a=2,c=h(),b=function(){a--;0==a&&c&&c(!0)};globalThis.__onGCastApiAvailable=b;l("//www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js",n,b)}};if(q("CriOS")){var t=globalThis.__gCrWeb&&globalThis.__gCrWeb.message&&globalThis.__gCrWeb.message.invokeOnHost;t&&(r(),t({command:"cast.sender.init"}))}else if(q("Android")&&q("Chrome/")&&globalThis.navigator.presentation){r();var u=globalThis.navigator.userAgent.match(/Chrome\/([0-9]+)/);m(["//www.gstatic.com/eureka/clank/"+(u?parseInt(u[1],10):0)+f,"//www.gstatic.com/eureka/clank"+f])}else globalThis.chrome&&globalThis.navigator.presentation&&!q("Edge")?(r(),m(k.map(p))):n();})();
   }
 
 
@@ -1333,9 +1333,9 @@ class Play {
       if ($(`#${id}`).hasClass('js-playset'))
         config.onComplete = Playset.onComplete
 
-      window.Play(id, JSON.parse($('.js-play8-playlist').val()), config)
+      globalThis.Play(id, JSON.parse($('.js-play8-playlist').val()), config)
 
-      onclick('.js-play8-speed', window.Play(id).speed)
+      onclick('.js-play8-speed', globalThis.Play(id).speed)
       onclick('.js-play8-gofullscreen', jwplayer(id).setFullscreen)
     })
   }
@@ -1351,11 +1351,11 @@ $(document).keydown(function(e) {
 
 
 // allow "Play(.., ..)" globally:
-window.Play = (id, playlist, options) => new Play(id, playlist, options) // promote to global
+globalThis.Play = (id, playlist, options) => new Play(id, playlist, options) // promote to global
 
 // only these (static) methods are available globally, eg: Play.seek(..)
 for (const meth of ['sec2hms', 'seconds', 'seek', 'filename_char_encoder', 'when_ready_player'])
-  window.Play[meth] = Play[meth]
+  globalThis.Play[meth] = Play[meth]
 
 
 if (IE)

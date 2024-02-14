@@ -5,10 +5,12 @@
 const log = (
   typeof Deno !== 'undefined'  ||
   typeof location === 'undefined'  ||
-  location.host === 'localhost'  ||
-  location.host.substr(0,  4) === 'www-'  ||
-  location.host.substr(0,  4) === 'cat-'  ||
-  location.host === 'av.dev.archive.org'
+  location.host === 'av.dev.archive.org'  ||
+  location.host.match(/^(www|cat)-[a-z0-9]+\.archive\.org/)  ||
+  location.host.endsWith('.code.archive.org')  ||
+  location.host.startsWith('ia-petabox')  ||
+  location.host.split(':')[0]  === 'localhost'  ||
+  globalThis?.navigator?.onLine === false
     /* eslint-disable-next-line no-console */
     ? console.log.bind(console) // convenient, no?  Stateless function
     : () => {}
@@ -24,6 +26,7 @@ const warn = console.error.bind(console)
  */
 function fatal(...str) {
   warn('FATAL ERROR:', ...str)
+  // deno-lint-ignore no-window
   if ((typeof window  !== 'undefined' &&        window.FATAL_THROW) ||
       (typeof Deno    !== 'undefined' && Deno.env.get('FATAL_THROW'))) {
     throw Error(`FATAL ERROR: ${str[0]}`)

@@ -106,7 +106,7 @@ table {
         link.href = '/css/av-player.css?v=1'
         document.getElementsByTagName('head')[0].appendChild(link)
 
-        setTimeout(() => window.Play('jw6', playlist, config), 1000) // xxx embarassing ;)
+        setTimeout(() => globalThis.Play('jw6', playlist, config), 1000) // xxx embarassing ;)
       } else {
         this.mdapi.files.forEach((fi) => {
           // sigh use slot since this.shadowRoot.getElementById('theatre-ia') stopped working :(
@@ -132,7 +132,7 @@ table {
 
     const url = `https://archive.org/metadata/${this.id}`
 
-    const response = await fetch(window.navigator.onLine === false
+    const response = await fetch(globalThis.navigator.onLine === false
       ? `http://localhost:5555/json/${this.id}.json`
       : url)
     return response.json()

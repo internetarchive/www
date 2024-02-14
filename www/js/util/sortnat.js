@@ -1,4 +1,4 @@
-
+// deno-lint-ignore-file
 /**
  * Natural sorts a javascript array, assuming each element is a hashmap, where we sort based
  * on the key/field name that is passed in
