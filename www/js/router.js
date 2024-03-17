@@ -16,8 +16,8 @@ const routeFN = (mdapi = null, type = null) => {
       bundle: { module: '../js/details-page.js' }, // xxx pass mdapi to details-page and set/leverage other 'type's
       action: (ctx) => {
         // avoid SPA not actually making a page change in the nav, fix reload issues, etc.
-        if (window.location.pathname !== ctx.pathname)
-          window.location.pathname = ctx.pathname
+        if (globalThis.location.pathname !== ctx.pathname)
+          globalThis.location.pathname = ctx.pathname
       },
     })
   }
@@ -28,8 +28,8 @@ const routeFN = (mdapi = null, type = null) => {
     bundle: { module: '../js/search-page.js' },
     action: (ctx) => {
       // avoid SPA not actually making a page change in the nav, fix reload issues, etc.
-      if (window.location.pathname !== ctx.pathname)
-        window.location.pathname = ctx.pathname
+      if (globalThis.location.pathname !== ctx.pathname)
+        globalThis.location.pathname = ctx.pathname
     },
   })
 

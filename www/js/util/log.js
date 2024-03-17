@@ -26,9 +26,8 @@ const warn = console.error.bind(console)
  */
 function fatal(...str) {
   warn('FATAL ERROR:', ...str)
-  // deno-lint-ignore no-window
-  if ((typeof window  !== 'undefined' &&        window.FATAL_THROW) ||
-      (typeof Deno    !== 'undefined' && Deno.env.get('FATAL_THROW'))) {
+  if (globalThis.FATAL_THROW ||
+      (typeof Deno !== 'undefined' && Deno.env.get('FATAL_THROW'))) {
     throw Error(`FATAL ERROR: ${str[0]}`)
   } else {
     Deno.exit(1)

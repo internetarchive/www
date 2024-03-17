@@ -67,7 +67,7 @@ form > div {
 
     const url = `https://archive.org/advancedsearch.php?output=json&q=${this.query}&fl[]=${this.fields.join('&fl[]=')}`
 
-    const response = await fetch(window.navigator.onLine === false
+    const response = await fetch(globalThis.navigator.onLine === false
       ? 'http://localhost:5555/json/search.json'
       : url)
     const json = await response.json()
