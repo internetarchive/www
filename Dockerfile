@@ -7,5 +7,5 @@ WORKDIR /app
 COPY . .
 
 USER deno
-RUN deno cache ../httpd.js
-CMD cd www  && ../httpd.js
+RUN deno cache httpd.js
+CMD cd www && ../httpd.js
