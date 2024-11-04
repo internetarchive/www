@@ -1,0 +1,11 @@
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/internetarchive/dyno:main
+    steps:
+    - uses: actions/checkout@v4
+    - run: /app/lint

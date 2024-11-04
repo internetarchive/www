@@ -1,0 +1,9 @@
+on: [push, workflow_dispatch]
+jobs:
+  cicd:
+    # https://github.com/internetarchive/cicd
+    uses: internetarchive/cicd/.github/workflows/cicd.yml@main
+    with:
+      NOMAD_VAR_HOSTNAMES: '["www"]'
+    secrets:
+      NOMAD_TOKEN_EXT: ${{ secrets.NOMAD_TOKEN_EXT }}

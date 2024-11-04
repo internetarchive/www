@@ -1,13 +1,13 @@
 # archive.org website prototype - using only javascript static files
 
 ## live site / demo
-https://internetarchive-www.dev.archive.org
+https://internetarchive-www.ext.archive.org
 
 leverages native `web components` and lightweight `lit` helper
 
 ## Quickstart
 ```
-git clone git@gitlab.com:internetarchive/www
+git clone git@github.com:internetarchive/www
 ```
 
 
