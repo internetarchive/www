@@ -12,13 +12,13 @@ git clone git@github.com:internetarchive/www
 
 
 ## Local/offline dev
-```
-cd www  && ../httpd.js -p5555
+```sh
+./httpd.js -p5555
 ```
 will run a local/minimal http file server at http://localhost:5555
 
 ## Offline with preseeded items
-```
+```sh
 ./get-mdapi-json.sh
 ```
 - run `httpd.js` like above

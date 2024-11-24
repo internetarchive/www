@@ -4,7 +4,7 @@ import { describe, it, expect, run } from 'https://raw.githubusercontent.com/int
 import {
   array_flip, friendly_truncate, killspace,
   ksort, krsort, strip_tags, str_replace, ucwords, vsort, vrsort, map_from_keys,
-} from '../../www/js/util/strings.js'
+} from '../../js/util/strings.js'
 
 
 describe('test strings.js', () => {

@@ -1,11 +1,10 @@
-FROM denoland/deno:alpine
+FROM caddy:alpine
 
-# `coreutils` for `env -S`
-RUN apk add zsh coreutils
+WORKDIR /usr/share/caddy/
 
-WORKDIR /app
+# setup single `rewrite` rule in std. caddy config
+RUN sed -i 's/file_server/file_server\n  rewrite \/details\/ index.html/' /etc/caddy/Caddyfile
+
+RUN cat /etc/caddy/Caddyfile
+
 COPY . .
-
-USER deno
-RUN deno cache httpd.js
-CMD cd www && ../httpd.js
