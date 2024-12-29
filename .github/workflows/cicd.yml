@@ -6,5 +6,6 @@ jobs:
     with:
       NOMAD_VAR_HOSTNAMES: '["www"]'
       NOMAD_VAR_PORTS: '{ 80 = "http" }'
+      NOMAD_VAR_MEMORY: 100 # xxx
     secrets:
       NOMAD_TOKEN_EXT: ${{ secrets.NOMAD_TOKEN_EXT }}
