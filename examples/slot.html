@@ -23,12 +23,14 @@ take a look at what's _not_ in '#shadow-root`s...
 
 
 <script type="module">
-  import { LitElement, html, css } from 'https://esm.archive.org/lit'
-  import { Router } from 'https://esm.archive.org/@vaadin/router@^1'
+  // eslint-disable-next-line no-unused-vars
+  import { LitElement, html, _css } from 'https://esm.ext.archive.org/lit@3.2.1'
+  import { Router } from 'https://esm.ext.archive.org/@vaadin/router@1.7.5'
   import { jwplayer, jwbase } from '../js/jwplayer/jwplayer.js'
 
   customElements.define('x-nav', class extends LitElement {
-    onAfterEnter(location, commands, router) {
+    // eslint-disable-next-line no-unused-vars
+    onAfterEnter(_location, _commands, _router) {
       // add div to light DOM
       const rootTextEl = document.createElement('div')
       rootTextEl.setAttribute('id', 'jw6')
@@ -37,7 +39,7 @@ take a look at what's _not_ in '#shadow-root`s...
       jwplayer('jw6').setup({
         file: 'https://archive.org/download/stairs/stairs.mp4',
         width: 'responsive',
-        base: jwbase
+        base: jwbase,
       })
     }
 
@@ -54,9 +56,8 @@ take a look at what's _not_ in '#shadow-root`s...
   })
 
 
-  new Router(document.getElementById('outlet')).setRoutes([
-    { path: '(.*)',
-      component: 'x-nav',
-    }
-  ])
+  new Router(document.getElementById('outlet')).setRoutes([{
+    path: '(.*)',
+    component: 'x-nav',
+  }])
 </script>

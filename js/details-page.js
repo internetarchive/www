@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'https://esm.archive.org/lit'
+import { LitElement, html, css } from 'https://esm.ext.archive.org/lit@3.2.1'
 
 import './play8/play8.js'
 import Player from  './player.js'
@@ -153,7 +153,7 @@ table {
     return html`
 <script src="https://archive.org/jw/8/jwplayer.js"></script>
 
-<link href="https://esm.archive.org/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://esm.ext.archive.org/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <div class="container container-ia"></div>
 <div id="theatre-ia-wrap" class="container container-ia width-max">

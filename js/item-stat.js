@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'https://esm.archive.org/lit'
+import { LitElement, html, css } from 'https://esm.ext.archive.org/lit@3.2.1'
 
 /* eslint-disable-next-line import/prefer-default-export */
 customElements.define('item-stat', class ItemStat extends LitElement {

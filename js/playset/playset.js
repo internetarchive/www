@@ -9,7 +9,7 @@
 // xxx share/link as modal?
 // xxx cleanup/improve descriptions for description-less items?
 
-import $ from 'https://esm.archive.org/jquery@^3.6.0'
+import $ from 'https://esm.ext.archive.org/jquery@3.7.1'
 
 import cgiarg from '../util/cgiarg.js'
 import { log } from '../util/log.js'

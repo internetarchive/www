@@ -1,7 +1,7 @@
 // Video/Audio/TV related playback javascript - wrapping and extensions to jwplayer
 // For /details/[IDENTIFIER]  and  /embed/[IDENTIFIER]  and  TV pages and more
 
-import $ from 'https://esm.archive.org/jquery@^3.6.0'
+import $ from 'https://esm.ext.archive.org/jquery@3.7.1'
 
 /* eslint-disable-next-line import/no-named-as-default */
 import cgiarg from '../util/cgiarg.js'
