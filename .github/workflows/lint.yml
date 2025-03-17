@@ -1,6 +1,4 @@
-on:
-  workflow_call:
-
+on: [push, workflow_dispatch]
 jobs:
   lint:
     runs-on: ubuntu-latest
