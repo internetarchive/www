@@ -1,7 +1,8 @@
 # archive.org website prototype - using only javascript static files
 
 ## live site / demo
-https://www.ext.archive.org
+https://archive-www.netlify.app
+
 
 leverages native `web components` and lightweight `lit` helper
 
