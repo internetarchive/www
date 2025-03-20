@@ -151,8 +151,6 @@ table {
 
 
     return html`
-<script src="https://archive.org/jw/8/jwplayer.js"></script>
-
 <link href="https://esm.ext.archive.org/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <div class="container container-ia"></div>
