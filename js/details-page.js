@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'https://esm.ext.archive.org/lit@3.2.1'
 
-import './play8/play8.js'
-import Player from  './player.js'
-import { log } from './util/log.js'
+import 'https://av.dev.archive.org/js/play.js'
+import Player from 'https://av.archive.org/js/player.js'
+import { log } from 'https://av.archive.org/js/util/log.js'
 import ios from './util/ios.js'
 
 
@@ -27,10 +27,8 @@ export class DetailsPage extends LitElement {
 
     this.id = id
 
-    // Setup a <slot> outside of shadow DOM (into light DOM) since `<div id="jw6">` is needed
-    // by jwplayer to be in (light) DOM
-    const rootTextEl = document.createElement('div')
-    rootTextEl.setAttribute('id', 'jw6')
+    // Add <slot> outside of shadow DOM (into light DOM) since jwplayer needs to be in (light) DOM
+    const rootTextEl = document.createElement('play-av')
     this.appendChild(rootTextEl) // NOTE: `this` === custom element root
   }
 
@@ -73,7 +71,7 @@ table {
   }
 
   async updated(props) {
-    if (props.has('id')) {
+    if (props.has('id') && this.mdapi === null) {
       this.mdapi = await this.mdapi_xhr()
 
       const player = new Player(this.mdapi)
@@ -100,13 +98,15 @@ table {
         }
 
         // add in IA-specific CSS overrides and additions to stock jwplayer
-        const link  = document.createElement('link')
+        const link = document.createElement('link')
         link.rel  = 'stylesheet'
         link.type = 'text/css'
-        link.href = '/css/av-player.css?v=1'
-        document.getElementsByTagName('head')[0].appendChild(link)
+        link.href = 'https://av.archive.org/css/av-player.css?v=1'
 
-        setTimeout(() => globalThis.Play('jw6', playlist, config), 1000) // xxx embarassing ;)
+        document.getElementsByTagName('head')[0].appendChild(link)
+        const play = document.querySelector('play-av')
+
+        play.mdapi = this.mdapi
       } else {
         this.mdapi.files.forEach((fi) => {
           // sigh use slot since this.shadowRoot.getElementById('theatre-ia') stopped working :(
@@ -128,8 +128,6 @@ table {
   }
 
   async mdapi_xhr() {
-    this.mdapi = null
-
     const url = `https://archive.org/metadata/${this.id}`
 
     const response = await fetch(globalThis.navigator.onLine === false
