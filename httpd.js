@@ -7,4 +7,4 @@ import httpd from 'https://deno.land/x/httpd/mod.js'
 httpd((req, headers) => {
   if (new URL(req.url).pathname.startsWith('/details/'))
     return new Response(Deno.readTextFileSync('index.html'), { headers })
-})
+}, { port: 5555 })
