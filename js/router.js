@@ -1,4 +1,4 @@
-import { Router } from 'https://esm.ext.archive.org/@vaadin/router@1.7.5'
+import { Router } from 'https://esm.archive.org/@vaadin/router@1.7.5'
 import { log } from 'https://av.archive.org/js/util/log.js'
 
 import MDAPI from './mdapi.js'
